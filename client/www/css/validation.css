@@ -1,0 +1,8 @@
+
+ .my-form {
+   transition:all linear 0.5s;
+   background: transparent;
+ }
+ .my-form.ng-invalid {
+   background: red;
+ }

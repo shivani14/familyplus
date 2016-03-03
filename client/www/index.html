@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+
+    <!-- bootstrap -->
+     <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+       <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+ 
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+  
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet"> -->
+<!-- jquery -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    -
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+ 
+<!-- common scripts -->
+<script src="js/common/app.route.config.js"></script>
+   
+    <!-- your app's js -->
+    <!-- <script src="js/app.js"></script> -->
+
+    <!-- responsive -->
+    <link href="css/mediaQuery.css" rel="stylesheet"></link>
+
+
+      <!-- login -->
+      <link href="css/style.css" rel="stylesheet">
+    <script src="js/login/login.controller.js"></script>
+    <script src="js/login/changePassword.controller.js"></script>
+
+
+
+    <!-- Main page -->
+    <script src="js/mainPage/mainPage.controller.js"></script>
+
+  <!-- invite -->
+  <script src="js/invite/invite.controller.js"></script>
+  
+    <link href="css/register.css" rel="stylesheet">
+    <script src="js/registration/register.controller.js"></script>
+
+    <!-- checkin -->
+     <script src="js/checkin/checkinList.controller.js"></script>
+     <script src="js/checkin/lastcheckinList.controller.js"></script>
+
+     <!-- detailed page -->
+     <script src="js/detailed info/detailedPage.controller.js"></script>
+
+     <!-- search -->
+     <script src="js/search/search.controller.js"></script>
+
+     <!-- profile -->
+     <script src="js/profile/groupmemberList.controller.js"></script>
+     <script  src="js/profile/editProfile.controller.js"></script>
+  </head>
+
+
+
+  <body ng-app="FamilyPlusApp">
+
+<ion-nav-view class="pane"></ion-nav-view>
+
+
+    <script id="my-popover.html" type="text/ng-template">
+  <ion-popover-view>
+    <ion-header-bar style="background-color:#bfbfbf;">
+    <p> <span class="ion-gear-a" style="font-size:30px;margin-top=0px;"><h1 class="title">Account Settings</h1></span>
+    </ion-header-bar>
+    <ion-content>
+ 
+  <div class="list" id="popover"> 
+<a class="item item-avatar" href="#/mainPage/editProfile">
+    
+    <span class="ion-person" style="font-size:30px;margin-top=0px;">  <h2>Edit profile</h2> </span>
+ 
+    </a>
+<a class="item item-avatar" href="#/mainPage/changePassword">
+ 
+ 
+    <span class="ion-locked" style="font-size:30px;margin-top=0px;"> <h2>Change Password</h2> </span>
+   
+    </a>
+ </div>
+    </ion-content>
+  </ion-popover-view>
+</script>
+
+
+  </body>
+</html>
