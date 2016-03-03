@@ -19,7 +19,7 @@
 <br>
 
 
-		<input type="number" class="form-control" name="Mobileno" placeholder="Mobile No" style="background-color:#e0e0eb;" ng-model="user.name" required ng-minlength="10" ng-maxlength="10">
+		<input type="number" class="form-control" name="Mobileno" placeholder="Mobile No" style="background-color:#e0e0eb;" ng-model="memberinfo.name" required ng-minlength="10" ng-maxlength="10">
 	
 <div ng-show="myForm.$submitted || myForm.Mobileno.$touched" style="margin-top:0px;padding-bottom:20px;padding-top:0px;">
 						<div ng-show="myForm.Mobileno.$error.required" class="help-block"><p class="text-danger" style="font-size:15px;font-weight:bold;"> please enter mobile no</div>
@@ -28,7 +28,7 @@
 		</div>
 
 		
-<input type="password" class="form-control" name="password" placeholder="Password" style="background-color:#e0e0eb;" ng-model="user.password" required minlength="6">
+<input type="password" class="form-control" name="password" placeholder="Password" style="background-color:#e0e0eb;" ng-model="memberinfo.password" required minlength="6">
 
 <div ng-show="myForm.$submitted || myForm.password.$touched" style="margin-top:0px;">
 
@@ -45,8 +45,8 @@
 	<br> 
 
 
-	{{formCheck.isChecked}} 
-	
+	{{formCheck.isChecked}}  
+	<p class="text-danger" style="font-size:15px;font-weight:bold;"> 	{{err}} </p>
 
 <input type="submit" class="btn-primary btn-lg" value="login"></input>&nbsp;&nbsp;
 <a nav-direction="forward" href="#/register"><input type="button" class="btn-default btn-lg" value="Register"></input></a> 

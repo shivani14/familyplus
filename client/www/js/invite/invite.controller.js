@@ -6,18 +6,19 @@ angular.module('FamilyPlusApp').controller('inviteController',['$scope','$http',
 			$http({
 				method:'post',
 				url:'http://localhost:3002/',
-				data:$httpParamSerializer($scope.user);
+				data:$httpParamSerializer($scope.user),
 				headers :{'Content-Type': 'application/x-www-form-urlencoded','Access-Control-Allow-Origin':'*'}
 
-			}).success(function(err,data)
+			}).success(function(data)
 			{
-				if(err)
+				if(data.err)
 				{
 
 				}
 				else
 				{
-					console.log("--data",data);
+					console.log("--data--",data);
+					
 				}
 
 			});

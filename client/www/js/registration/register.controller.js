@@ -38,25 +38,29 @@ angular.module('FamilyPlusApp').controller('registerController',['$scope','$http
 	{
 		$http({
 			method :'post',
-			url : 'http://localhost:3001/',
+			url : 'http://localhost:3001/insert',
 			data :  $httpParamSerializer($scope.user),
 			headers :{'Content-Type': 'application/x-www-form-urlencoded','Access-Control-Allow-Origin':'*'} 
 
 		}).success(function(data)
 		{
-			if(data.error)
-			{
 
-			}
-			else
-			{
+			
 				if(data == true)
 				{	
 					$scope.user ={};
 					$window.location.href =	"http://localhost:8100/#/login";
 				}
 			}
+		).error(function(data,status)
+		{
+			if(status==406)
+			{
+				$scope.err = "username already exist"
+			}
+
 		});
-	}
+
+			}
 	
 }]);
