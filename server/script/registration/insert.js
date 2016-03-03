@@ -1,6 +1,7 @@
 
 var express = require('express');
 var session = require('express-session');
+var nodemailer = require('nodemailer');
 
 var myapp = express();
 var bodyparser = require('body-parser');
@@ -38,8 +39,8 @@ var member_schema = new schema(	{
 	member_id:{type:schema.ObjectId},
 	first_name:{type:String,required:true},
 	last_name:{type:String,required:true},
-	mail_id:{type:String,required:true},
-	phon_no:{type:Number,required:true,unique:true},
+	mail_id:{type:String,required:true,unique:true},
+	phon_no:{type:Number,required:true},
 	password:{type:String,required:true},
 	role:{type:String,required:true},
 	group_id:{type:schema.ObjectId,ref:'group_model'},
@@ -141,15 +142,16 @@ myapp.post("/insert",function(req,res,next)
 myapp.use(function(err, req, res, next) {
   console.log("error!!!");
   	res.status(406).send("error");
+
 });
 
 
 myapp.post("/login",function(req,res)
 {
 	var data = req.body;
-	var phonno = data.name;
+	var emailid = data.uname;
 	var password = data.password;
-	member_model.findOne({$and:[{'password':password},{'phon_no':phonno}]},'_id first_name',function(err,data)
+	member_model.findOne({$and:[{'password':password},{'mail_id':emailid}]},'_id first_name role group_id',function(err,data)
 	{
 			if(err)
 			{
@@ -165,11 +167,34 @@ myapp.post("/login",function(req,res)
 				else
 				{
 					member = data._id;
+					role = data.role;
 					firstname = data.first_name;
+					group_id = data.group_id;
 
 					sess = req.session;
 					sess.firstname = firstname;
-					res.send(sess.firstname);
+					sess.role = role;
+
+				group_model.findOne({_id:group_id},'invite_id',function(err,data)
+				{
+					if(err)
+					{
+						throw err;
+					}
+					else
+					{
+						inviteid = data.invite_id;
+						sess.inviteid = inviteid;
+						console.log(sess.inviteid);
+						
+					}
+
+				});
+					
+					res.setHeader('Content-Type', 'application/json');
+   					 res.send(JSON.stringify({firstname:sess.firstname,role:sess.role,inviteid:sess.inviteid}));
+   					 
+					
 
 				}
 			}
@@ -178,6 +203,40 @@ myapp.post("/login",function(req,res)
 
 
 
+
+});
+
+myapp.post("/invite",function(req,res)
+{
+	var data = req.body;
+	var email = data.emailid;
+	var id = inviteid;
+	
+	var transporter = nodemailer.createTransport({
+        service: 'Gmail',
+        auth: {
+            user: 'shivanisjoshi14@gmail.com', // Your email id
+            pass: '9408974217' // Your password
+        }
+    });
+
+	 var mailOptions = {
+    from: 'shivanisjoshi14@gmail.com', 
+    to: email, 
+    subject: 'from family plus', 
+    text: "hii your invite id is"+id+"."
+   
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+        console.log(error);
+      /*  res.json({yo: 'error'});*/
+    }else{
+        console.log('Message sent: ' + info.response);
+        /*res.json({yo: info.response});*/
+    };
+});
 
 });
 
