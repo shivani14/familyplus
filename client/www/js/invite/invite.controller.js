@@ -1,27 +1,23 @@
 angular.module('FamilyPlusApp').controller('inviteController',['$scope','$http','$httpParamSerializer',function($scope,$http,$httpParamSerializer)
 {
 		$scope.user ={};
+	
 		$scope.sendEmail = function()
 		{
-			$http({
+			/*$http({
 				method:'post',
-				url:'http://localhost:3002/',
+				url:'http://localhost:3001/invite',
 				data:$httpParamSerializer($scope.user),
 				headers :{'Content-Type': 'application/x-www-form-urlencoded','Access-Control-Allow-Origin':'*'}
 
 			}).success(function(data)
 			{
-				if(data.err)
-				{
+			
 
-				}
-				else
-				{
-					console.log("--data--",data);
-					
-				}
+			}).error(function(data,status)
+			{
 
-			});
+			});*/
 
 		}
 }]);

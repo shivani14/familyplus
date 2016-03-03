@@ -19,11 +19,18 @@
 <br>
 
 
-		<input type="number" class="form-control" name="Mobileno" placeholder="Mobile No" style="background-color:#e0e0eb;" ng-model="memberinfo.name" required ng-minlength="10" ng-maxlength="10">
+<input type="email" class="form-control" name="emailid" placeholder="Email id/username" style="background-color:#e0e0eb;" ng-model="memberinfo.uname" required maxlength="50" />
+
+
 	
-<div ng-show="myForm.$submitted || myForm.Mobileno.$touched" style="margin-top:0px;padding-bottom:20px;padding-top:0px;">
-						<div ng-show="myForm.Mobileno.$error.required" class="help-block"><p class="text-danger" style="font-size:15px;font-weight:bold;"> please enter mobile no</div>
-							<div ng-show="myForm.Mobileno.$error.minlength || myForm.Mobileno.$error.maxlength"><p class="text-danger" style="font-size:15px;font-weight:bold;"> enter valid mobile no</div>
+<div ng-show="myForm.$submitted || myForm.emailid.$touched" style="margin-top:0px;padding-bottom:20px;padding-top:0px;">
+
+						<div ng-show="myForm.emailid.$error.required" class="help-block"><p class="text-danger" style="font-size:15px;font-weight:bold;"> please enter emailid</p></div>
+						
+						<div ng-show="myForm.emailid.$error.maxlength"><p class="text-danger" style="font-size:15px;font-weight:bold;">email id must be less than 50.</p></div>
+
+							<div ng-show="myForm.emailid.$error.email"><p class="text-danger" style="font-size:15px;font-weight:bold;">enter valid email id</p></div>
+
 												
 		</div>
 
@@ -49,7 +56,7 @@
 	<p class="text-danger" style="font-size:15px;font-weight:bold;"> 	{{err}} </p>
 
 <input type="submit" class="btn-primary btn-lg" value="login"></input>&nbsp;&nbsp;
-<a nav-direction="forward" href="#/register"><input type="button" class="btn-default btn-lg" value="Register"></input></a> 
+<input type="button" class="btn-default btn-lg" value="Register" ng-click="registrationpage()"></input></a> 
 <br>
 
 

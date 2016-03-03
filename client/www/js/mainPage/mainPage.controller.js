@@ -1,6 +1,17 @@
 angular.module('FamilyPlusApp').controller('mainPageController',['$scope','$location','$ionicPopover',function($scope,$location,$ionicPopover)
 {
+  $scope.role = $scope.role;
+
+  if($scope.role == 'group head')
+  {
+    $scope.flag = true;
+  }
+  else
+  {
+    $scope.flag = false;
+  }
   /*
+
 
 	var template = '<ion-popover-view><ion-header-bar> <h1 class="title">Account Settings</h1> </ion-header-bar> <ion-content> <div class="list"><a class="item item-avatar" href="#/login"><h3>Signout</h3></a></div></ion-content></ion-popover-view>'*/
 

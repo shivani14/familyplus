@@ -9,7 +9,7 @@
 <br>
 
 <input type="email" class="form-control" name="emailid" placeholder="Email id" style="background-color:#e0e0eb;" ng-model="user.emailid" required maxlength="50" />
-
+{{user.inviteid}}
 <div ng-show="myForm.$submitted || myForm.emailid.$touched">
 	<div ng-show="myForm.emailid.$error.required" class="help-block"><p class="text-danger" style="font-size:15px;font-weight:bold;"> please enter emailid</p></div>
 						

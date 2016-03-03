@@ -23,10 +23,14 @@ angular.module('FamilyPlusApp').controller('loginController',['$scope','$locatio
      			console.log(data.err);
      		}else
      		{
-     			if(data == "shivani")
+     			if(data)
      			{
-     				$rootScope.name = data;
+     				$rootScope.name = data.firstname;
+                         $rootScope.role = data.role;
+                         $rootScope.inviteid = data.inviteid;
+
      				$window.location.href="#/mainPage/home";
+                         
      	
      			}
      			else
@@ -34,9 +38,10 @@ angular.module('FamilyPlusApp').controller('loginController',['$scope','$locatio
      				$scope.err = data;
      			}
 
-     			console.log(data);
+     			
      		}
-     	})
+     	});
+         
     
 
      	
@@ -47,6 +52,10 @@ angular.module('FamilyPlusApp').controller('loginController',['$scope','$locatio
      	
      }
     
+     $scope.registrationpage = function()
+          {
+               $window.location.href="#/register";
+          };
      
 
 }]);

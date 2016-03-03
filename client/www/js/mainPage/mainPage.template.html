@@ -73,12 +73,14 @@
     <i class="icon ion-home"></i>
   </a>
   <div>
-  <a class="tab-item" ui-sref=".invite" ng-show="formCheck.isChecked">
-    <i class="icon ion-person-add"></i>
+  <a class="tab-item" ui-sref=".invite"  ng-show="flag">
+   <i class="icon ion-person-add"></i>
+
+
 
 
 </a>
-     <a class="tab-item" ui-sref=".groupMember" ng-hide="formCheck.isChecked">
+     <a class="tab-item" ui-sref=".groupMember" ng-hide="flag">
     <i class="icon ion-person-stalker"></i>
     </a>
     </div>
