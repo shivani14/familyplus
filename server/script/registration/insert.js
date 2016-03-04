@@ -1,30 +1,28 @@
+// required modules
 
 var express = require('express');
 var session = require('express-session');
 var nodemailer = require('nodemailer');
-
-var myapp = express();
-var bodyparser = require('body-parser');
-myapp.use(bodyparser.urlencoded({extended:true}));
-myapp.use(bodyparser.json());
-
-
 var random = require("random-js")();
 var mongoose = require('mongoose');
-var flag = true;
+var bodyparser = require('body-parser');
 
+
+var myapp = express();
+myapp.use(bodyparser.urlencoded({extended:true}));
+myapp.use(bodyparser.json());
 myapp.use(session({secret: 'ssshhhhh'}));
+
+
+var flag = true;
 var sess;
-
-
 var connect = mongoose.connect('mongodb://localhost/test');
-
 var schema = mongoose.Schema;
 var Objid = schema.ObjectId;
-
 var group_id;
 
-// group schema nad model
+
+// group schema and model
 var groupSchema = new schema(
 	{
 	group_id : {type:schema.ObjectId},
@@ -34,13 +32,15 @@ var groupSchema = new schema(
 
 	var group_model = mongoose.model('tbl_groupinfos',groupSchema);
 
+
+
 // member schema and model
 var member_schema = new schema(	{
 	member_id:{type:schema.ObjectId},
 	first_name:{type:String,required:true},
 	last_name:{type:String,required:true},
 	mail_id:{type:String,required:true,unique:true},
-	phon_no:{type:Number,required:true},
+	phon_no:{type:Number},
 	password:{type:String,required:true},
 	role:{type:String,required:true},
 	group_id:{type:schema.ObjectId,ref:'group_model'},
@@ -49,6 +49,9 @@ var member_schema = new schema(	{
 });
 
  var member_model = mongoose.model('tbl_memberinfos',member_schema);
+
+
+// inserting data into mongodb
 
 myapp.post("/insert",function(req,res,next)
 {
@@ -59,18 +62,11 @@ myapp.post("/insert",function(req,res,next)
 	var emailid = data.emailid;
 	var mobno = data.mobileno;
 	var password = data.password;
-
 	var groupName = data.groupname;
-	if(data.checked == true)
-	{
-		var role = "group member";
-	}
-	else
-	{
-		var role = "group head";
-	}
-	
-	
+
+	var role = data.checked;
+
+
 	var member_model1 = new member_model(
 	{
 		first_name:first_name,
@@ -78,19 +74,58 @@ myapp.post("/insert",function(req,res,next)
 		mail_id:emailid,
 		phon_no:mobno,
 		password:password,
-		role:role,
-		
 		Active:true
 	
 
 	});
 	
+	if(role == "true")
+	{
+			var familyid = parseInt(data.familyid);
+		member_model1.role = "group member";
+		group_model.findOne({invite_id:familyid},'_id',function(err,data)
+		{
+			if(err)
+			{	
+				throw err;
+ 
+			}
+			else if(data == null)
+			{
 
-	member_model1.save(function(err)
+				res.status(500).send("error");
+			}
+			else
+			{
+				 member_model1.group_id = data._id;
+				
+				member_model1.save(function(err)
+				{
+					if(err)
+					{
+				res.status(406).send("error");
+					}
+					else
+					{
+						console.log(member_model1);
+						res.send(true);
+
+					}
+
+				});
+			}
+		})
+	
+
+	}
+	else
+	{
+		member_model1.role = "group head";
+		member_model1.save(function(err)
 	{
 		if(err)
 		{
-				next(err);
+			res.status(406).send("error");
 		}
 			else
 		{	
@@ -105,7 +140,7 @@ myapp.post("/insert",function(req,res,next)
 	{
 		if(err)
 		{
-			throw err;
+			res.status(406).send("error");
 		}
 		else
 		{
@@ -132,25 +167,19 @@ myapp.post("/insert",function(req,res,next)
 		}
 	});
 	
-
+	}
 	
-
-
-
 });
 
-myapp.use(function(err, req, res, next) {
-  console.log("error!!!");
-  	res.status(406).send("error");
 
-});
-
+ // authentication of user(login)
 
 myapp.post("/login",function(req,res)
 {
 	var data = req.body;
 	var emailid = data.uname;
 	var password = data.password;
+	console.log(emailid +" "+password);
 	member_model.findOne({$and:[{'password':password},{'mail_id':emailid}]},'_id first_name role group_id',function(err,data)
 	{
 			if(err)
@@ -160,9 +189,11 @@ myapp.post("/login",function(req,res)
 			}
 			else
 			{
-				if(data == null)
+				
+
+			if(data == null)
 				{
-					res.send("check username and password");
+					res.status(404).send("error");
 				}
 				else
 				{
@@ -175,6 +206,8 @@ myapp.post("/login",function(req,res)
 					sess.firstname = firstname;
 					sess.role = role;
 
+					
+
 				group_model.findOne({_id:group_id},'invite_id',function(err,data)
 				{
 					if(err)
@@ -185,19 +218,21 @@ myapp.post("/login",function(req,res)
 					{
 						inviteid = data.invite_id;
 						sess.inviteid = inviteid;
+						var object = {'firstname':sess.firstname,'role':sess.role,'inviteid':sess.inviteid};
 						console.log(sess.inviteid);
+						res.setHeader('Content-Type', 'application/json');
+   					 res.send(object);
 						
 					}
 
 				});
 					
-					res.setHeader('Content-Type', 'application/json');
-   					 res.send(JSON.stringify({firstname:sess.firstname,role:sess.role,inviteid:sess.inviteid}));
+					
    					 
 					
 
 				}
-			}
+		}
 
 	});
 
@@ -205,6 +240,8 @@ myapp.post("/login",function(req,res)
 
 
 });
+
+// sending email to member
 
 myapp.post("/invite",function(req,res)
 {
@@ -215,8 +252,8 @@ myapp.post("/invite",function(req,res)
 	var transporter = nodemailer.createTransport({
         service: 'Gmail',
         auth: {
-            user: 'shivanisjoshi14@gmail.com', // Your email id
-            pass: '9408974217' // Your password
+            user: 'shivanisjoshi14@gmail.com',
+            pass: '9408974217' 
         }
     });
 
@@ -231,10 +268,10 @@ myapp.post("/invite",function(req,res)
 transporter.sendMail(mailOptions, function(error, info){
     if(error){
         console.log(error);
-      /*  res.json({yo: 'error'});*/
+      	res.status(503).send("error");
     }else{
         console.log('Message sent: ' + info.response);
-        /*res.json({yo: info.response});*/
+      	res.send(true);
     };
 });
 
@@ -242,3 +279,4 @@ transporter.sendMail(mailOptions, function(error, info){
 
 
 myapp.listen(3001);
+	

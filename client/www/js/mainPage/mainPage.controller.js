@@ -1,7 +1,7 @@
 angular.module('FamilyPlusApp').controller('mainPageController',['$scope','$location','$ionicPopover',function($scope,$location,$ionicPopover)
 {
   $scope.role = $scope.role;
-
+  console.log($scope.role);
   if($scope.role == 'group head')
   {
     $scope.flag = true;

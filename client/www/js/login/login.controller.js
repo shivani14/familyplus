@@ -3,7 +3,7 @@ angular.module('FamilyPlusApp').controller('loginController',['$scope','$locatio
 
      $rootScope.formCheck = {};
 // Validation for login
-
+	$scope.flag=false;
      $scope.memberinfo ={};
   
 
@@ -18,29 +18,23 @@ angular.module('FamilyPlusApp').controller('loginController',['$scope','$locatio
 
      	}).success(function(data)
      	{
-     		if(data.err)
-     		{
-     			console.log(data.err);
-     		}else
-     		{
-     			if(data)
-     			{
-     				$rootScope.name = data.firstname;
-                         $rootScope.role = data.role;
-                         $rootScope.inviteid = data.inviteid;
+     		$scope.user ={};
+     		$scope.response = angular.fromJson(data);
+     		$rootScope.name = $scope.response.firstname;
+                         $rootScope.role = $scope.response.role;
+                         $rootScope.inviteid = $scope.response.inviteid;
 
+               
      				$window.location.href="#/mainPage/home";
-                         
-     	
-     			}
-     			else
-     			{
-     				$scope.err = data;
-     			}
-
-     			
-     		}
-     	});
+          }).error(function(data,status)
+          {
+          	$scope.flag=true;
+          	if(status==404)
+          	{
+          		       	$scope.err = "please check username and paasword"
+          	}
+   
+          })
          
     
 
@@ -54,7 +48,10 @@ angular.module('FamilyPlusApp').controller('loginController',['$scope','$locatio
     
      $scope.registrationpage = function()
           {
+          	$scope.user={};
                $window.location.href="#/register";
+          	
+          	
           };
      
 

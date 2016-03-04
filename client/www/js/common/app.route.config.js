@@ -2,16 +2,16 @@ angular.module('FamilyPlusApp', ['ionic']).config(function($stateProvider, $urlR
         $stateProvider
             .state('login', {
                 url:'/login',
-                templateUrl:'../js/login/login.template.html',
+                templateUrl:'../www/js/login/login.template.html',
                 controller:'loginController'
             }).state('register',{
                     url:'/register',
-                    templateUrl:'../js/registration/register.template.html',
+                    templateUrl:'../www/js/registration/register.template.html',
                     controller:'registerController'
 
             }).state('mainPage',{
                 url:'/mainPage',
-                templateUrl:'../js/mainPage/mainPage.template.html',
+                templateUrl:'../www/js/mainPage/mainPage.template.html',
                 controller:'mainPageController'
             
             }).state('mainPage.invite',{
@@ -19,7 +19,7 @@ angular.module('FamilyPlusApp', ['ionic']).config(function($stateProvider, $urlR
                     views:{
                         'content':{
                             
-                            templateUrl:'../js/invite/invite.template.html',
+                            templateUrl:'../www/js/invite/invite.template.html',
                             controller:'inviteController'
                         }
                     }
@@ -30,7 +30,7 @@ angular.module('FamilyPlusApp', ['ionic']).config(function($stateProvider, $urlR
                 views:{
                         'content':{
                             
-                            templateUrl:'../js/checkin/checkinlist.template.html',
+                            templateUrl:'../www/js/checkins/checkinlist.template.html',
                             controller:'checkinlistController'
                         }
                     }
@@ -39,7 +39,7 @@ angular.module('FamilyPlusApp', ['ionic']).config(function($stateProvider, $urlR
                 url:"/details",
                 views:{
                     'content':{
-                        templateUrl:'../js/detailed info/detailedPage.template.html',
+                        templateUrl:'../www/js/detailedinfo/detailedPage.template.html',
                         controller:'memberinfoController'
                     }
                 }
@@ -48,7 +48,7 @@ angular.module('FamilyPlusApp', ['ionic']).config(function($stateProvider, $urlR
                 url:"/list",
                 views:{
                     'content':{
-                        templateUrl:'../js/checkin/lastCheckinList.template.html',
+                        templateUrl:'../www/js/checkins/lastCheckinList.template.html',
                         controller:'lastcheckinListController'
                     }
                 }
@@ -57,7 +57,7 @@ angular.module('FamilyPlusApp', ['ionic']).config(function($stateProvider, $urlR
                 url:"/changePassword",
                 views:{
                     'content':{
-                        templateUrl:'../js/login/changePassword.template.html',
+                        templateUrl:'../www/js/login/changePassword.template.html',
                         controller:'changePasswordController'
                     }
                 }
@@ -67,7 +67,7 @@ angular.module('FamilyPlusApp', ['ionic']).config(function($stateProvider, $urlR
                 url:"/search",
                 views:{
                     'content':{
-                        templateUrl:'../js/search/search.template.html',
+                        templateUrl:'../www/js/search/search.template.html',
                         controller:'searchController'
                     }
                 }
@@ -75,7 +75,7 @@ angular.module('FamilyPlusApp', ['ionic']).config(function($stateProvider, $urlR
                 url:"/memberList",
                 views:{
                     'content':{
-                        templateUrl:'../js/profile/groupmemberList.template.html',
+                        templateUrl:'../www/js/profile/groupmemberList.template.html',
                         controller:'memberListController'
                     }
                 }
@@ -84,7 +84,7 @@ angular.module('FamilyPlusApp', ['ionic']).config(function($stateProvider, $urlR
                 url:"/editProfile",
                 views:{
                     'content':{
-                        templateUrl:'js/profile/editProfile.template.html',
+                        templateUrl:'../www/js/profile/editProfile.template.html',
                         controller:'editProfileController'
                     }
                 }

@@ -4,6 +4,16 @@
 
 <div style="margin-top:170px;">
 
+<div ng-show="flag">
+
+ <div class="alert alert-success">
+    <strong>Success!</strong> {{message}}
+     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  </div>
+</div>
+
+
+
 <form name="myForm" ng-submit="myForm.$valid && sendEmail()">
 <div class="form-group has-feedback"  ng-class="{ 'has-error': myForm.$invalid}" style="margin-top:20px;">
 <br>

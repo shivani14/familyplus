@@ -6,8 +6,18 @@
 <div style="width:100%;height:100%;margin:auto;">
 <div class="row">
 
- <img src="http://lorempixel.com/200/200/people/9/" class="avatar img-circle img-thumbnail" alt="avatar" style="margin:auto;">
 
+<div style="width:100%;height:100%;margin:auto;">
+  <h1 style="margin-top:20px;text-align:center;color:#ff6666;font-weight:bold;z-index:9000;"> Family plus</h1>
+
+</div>
+</div>
+<div ng-show="flag">
+
+ <div class="alert alert-danger">
+   {{err}}
+     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  </div>
 </div>
 
 <div class="row">
@@ -39,7 +49,7 @@
 
 <div ng-show="myForm.$submitted || myForm.password.$touched" style="margin-top:0px;">
 
-<div ng-show="myForm.Mobileno.$valid">
+<div ng-show="myForm.emailid.$valid">
 						<div ng-show="myForm.password.$error.required"><p class="text-danger" style="font-size:15px;font-weight:bold;"> please enter password</div>
 
 						<div ng-show="myForm.password.$error.minlength"><p class="text-danger" style="font-size:15px;font-weight:bold;"> password length is short.(minlenght=6)
@@ -48,12 +58,11 @@
 						
 		</div>
 
-	register as family head? <input type="checkbox" ng-model="formCheck.isChecked">
-	<br> 
+	
 
 
-	{{formCheck.isChecked}}  
-	<p class="text-danger" style="font-size:15px;font-weight:bold;"> 	{{err}} </p>
+
+	
 
 <input type="submit" class="btn-primary btn-lg" value="login"></input>&nbsp;&nbsp;
 <input type="button" class="btn-default btn-lg" value="Register" ng-click="registrationpage()"></input></a> 
