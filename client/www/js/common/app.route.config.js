@@ -2,7 +2,7 @@ angular.module('FamilyPlusApp', ['ionic']).config(function($stateProvider, $urlR
         $stateProvider
             .state('login', {
                 url:'/login',
-                templateUrl:'../js/login/logintemplate.html',
+                templateUrl:'../js/login/login.template.html',
                 controller:'loginController'
             }).state('register',{
                     url:'/register',
@@ -30,7 +30,7 @@ angular.module('FamilyPlusApp', ['ionic']).config(function($stateProvider, $urlR
                 views:{
                         'content':{
                             
-                            templateUrl:'../js/checkins/checkinlist.template.html',
+                            templateUrl:'../js/checkin/checkinlist.template.html',
                             controller:'checkinlistController'
                         }
                     }
@@ -39,7 +39,7 @@ angular.module('FamilyPlusApp', ['ionic']).config(function($stateProvider, $urlR
                 url:"/details",
                 views:{
                     'content':{
-                        templateUrl:'../js/detailedinfo/detailedPage.template.html',
+                        templateUrl:'../js/detailed-info/detailedPage.template.html',
                         controller:'memberinfoController'
                     }
                 }
@@ -48,7 +48,7 @@ angular.module('FamilyPlusApp', ['ionic']).config(function($stateProvider, $urlR
                 url:"/list",
                 views:{
                     'content':{
-                        templateUrl:'../js/checkins/lastCheckinList.template.html',
+                        templateUrl:'../js/checkin/lastCheckinList.template.html',
                         controller:'lastcheckinListController'
                     }
                 }
