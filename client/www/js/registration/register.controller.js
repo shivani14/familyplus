@@ -1,4 +1,4 @@
-angular.module('FamilyPlusApp').controller('registerController',['$scope','$http','$httpParamSerializer','$window','$location',function($scope,$http, $httpParamSerializer,$window,$location)
+angular.module('FamilyPlusApp').controller('registerController',['$scope','$http','$httpParamSerializer','$window','$location','$rootScope',function($scope,$http, $httpParamSerializer,$window,$location,$rootScope)
 {
 
 	$scope.checked=false;
@@ -44,6 +44,8 @@ angular.module('FamilyPlusApp').controller('registerController',['$scope','$http
 				if(data == true)
 				{	
 					$scope.user ={};
+					$rootScope.register = true;
+					console.log($rootScope.register);
 					$window.location.href =	"http://localhost:8100/#/login";
 				}
 			}
