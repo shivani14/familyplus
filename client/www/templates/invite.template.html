@@ -1,0 +1,46 @@
+
+
+<div class="container-fluid" style="background-image:url('img/backimg7.jpg');background-size:cover;">
+
+<div style="margin-top:100px;">
+
+<div ng-show="flag">
+
+ <div class="alert alert-success">
+    <strong>Success!</strong> {{message}}
+     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  </div>
+</div>
+
+
+
+<form name="myForm" ng-submit="myForm.$valid && sendEmail()">
+<div class="form-group has-feedback"  ng-class="{ 'has-error': myForm.$invalid}" style="margin-top:20px;">
+<br>
+
+<input type="email" class="form-control" name="emailid" placeholder="Email id" style="background-color:#e0e0eb;" ng-model="user.emailid" required maxlength="50" />
+{{user.inviteid}}
+<div ng-show="myForm.$submitted || myForm.emailid.$touched">
+	<div ng-show="myForm.emailid.$error.required" class="help-block"><p class="text-danger" style="font-size:15px;font-weight:bold;"> please enter emailid</p></div>
+						
+						<div ng-show="myForm.emailid.$error.maxlength"><p class="text-danger" style="font-size:15px;font-weight:bold;">email id must be less than 50.</p></div>
+
+							<div ng-show="myForm.emailid.$error.email"><p class="text-danger" style="font-size:15px;font-weight:bold;">enter valid email id</p></div>
+
+												
+		</div>
+
+
+
+  <div class="row">
+      <div style="margin:auto;">
+     
+    <button type="submit" class="btn-primary btn-lg" value="invite people" style="width:150px;"> Invite </button>
+
+      </div>
+      </div>
+</div>
+</form>
+</div>
+</div>
+
