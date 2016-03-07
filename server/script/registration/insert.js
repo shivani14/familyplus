@@ -205,7 +205,7 @@ myapp.post("/login",function(req,res)
 					sess = req.session;
 					sess.firstname = firstname;
 					sess.role = role;
-
+					sess.group_id = group_id;
 					
 
 				group_model.findOne({_id:group_id},'invite_id',function(err,data)
@@ -218,7 +218,7 @@ myapp.post("/login",function(req,res)
 					{
 						inviteid = data.invite_id;
 						sess.inviteid = inviteid;
-						var object = {'firstname':sess.firstname,'role':sess.role,'inviteid':sess.inviteid};
+						var object = {'firstname':sess.firstname,'role':sess.role,'group_id':sess.group_id};
 						console.log(sess.inviteid);
 						res.setHeader('Content-Type', 'application/json');
    					 res.send(object);
@@ -275,6 +275,47 @@ transporter.sendMail(mailOptions, function(error, info){
     };
 });
 
+});
+
+// memberlist
+
+myapp.post("/info",function(req,res)
+{
+	var data = req.body;
+	var group_id = data.group_id;
+	var name = data.name;
+
+	member_model.find({'group_id':group_id},'first_name last_name mail_id phon_no',function(err,data)
+	{
+		if(err)
+		{
+			throw err;
+		}
+		else
+		{
+			if(data==null)
+			{
+				res.status(404).send("err");
+			}
+			else
+			{
+			
+				/*info = {};
+				info.firstname = data.first_name;
+				info.lastname = data.last_name;
+				info.phon_no = data.phon_no;
+				info.mail_id = data.mail_id;
+				console.log(info);
+				res.setHeader('Content-Type', 'application/json');
+				res.send(info);*/
+				console.log(data);
+				res.send(data);
+				console.log("data is sended");
+
+
+			}
+		}
+	});
 });
 
 

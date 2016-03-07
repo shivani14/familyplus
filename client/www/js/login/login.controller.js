@@ -6,13 +6,13 @@ angular.module('FamilyPlusApp').controller('loginController',['$scope','$locatio
 	$scope.flag=false;
      $scope.memberinfo ={};
   
-
+     $rootScope.mailid = $scope.memberinfo.emailid;
      $scope.send = function()
      {
      	
      	$http({
      		method:'post',
-     		url:'http://localhost:3001/login',
+     		url:'http://10.12.42.58:3001/login',
      		data:$httpParamSerializer($scope.memberinfo),
      		headers:{'Content-Type': 'application/x-www-form-urlencoded','Access-Control-Allow-Origin':'*'}
 
@@ -22,9 +22,9 @@ angular.module('FamilyPlusApp').controller('loginController',['$scope','$locatio
      		$scope.response = angular.fromJson(data);
      		$rootScope.name = $scope.response.firstname;
                          $rootScope.role = $scope.response.role;
-                         $rootScope.inviteid = $scope.response.inviteid;
+                      	$rootScope.groupid = $scope.response.group_id;
 
-               
+
      				$window.location.href="#/mainPage/home";
           }).error(function(data,status)
           {

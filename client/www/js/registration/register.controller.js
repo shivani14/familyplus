@@ -33,7 +33,7 @@ angular.module('FamilyPlusApp').controller('registerController',['$scope','$http
 	{
 		$http({
 			method :'post',
-			url : 'http://localhost:3001/insert',
+			url : 'http://10.12.42.58:3001/insert',
 			data :  $httpParamSerializer($scope.user),
 			headers :{'Content-Type': 'application/x-www-form-urlencoded','Access-Control-Allow-Origin':'*'} 
 
@@ -46,7 +46,7 @@ angular.module('FamilyPlusApp').controller('registerController',['$scope','$http
 					$scope.user ={};
 					$rootScope.register = true;
 					console.log($rootScope.register);
-					$window.location.href =	"http://localhost:8100/#/login";
+					$window.location.href =	"#/login";
 				}
 			}
 		).error(function(data,status)
@@ -64,5 +64,10 @@ angular.module('FamilyPlusApp').controller('registerController',['$scope','$http
 	/*	console.log($scope.user);*/
 
 			}
+
+			$scope.backpage = function()
+			{
+				$window.location.href="#/login";
+			};
 	
 }]);

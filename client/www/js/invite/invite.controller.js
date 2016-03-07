@@ -6,7 +6,7 @@ angular.module('FamilyPlusApp').controller('inviteController',['$scope','$http',
 		{
 			$http({
 				method:'post',
-				url:'http://localhost:3001/invite',
+				url:'http://10.12.42.58:3001/invite',
 				data:$httpParamSerializer($scope.user),
 				headers :{'Content-Type': 'application/x-www-form-urlencoded','Access-Control-Allow-Origin':'*'}
 
