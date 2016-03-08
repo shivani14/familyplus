@@ -3,8 +3,7 @@ angular.module('FamilyPlusApp').controller('memberListController',['$scope','$ht
 	$scope.info ={};
 	$scope.info.group_id = $scope.groupid;
 	$scope.info.role = $scope.name;
-
-	$scope.emailid = $scope.mailid;
+	$scope.info.mail_id = $scope.mailid;
 	console.log($scope.info);
 
 		$http({

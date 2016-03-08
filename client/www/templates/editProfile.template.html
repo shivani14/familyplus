@@ -8,8 +8,14 @@
 </div>
 
 </div>
+<div ng-show="flag">
 
-<div class="row">
+ <div class="alert alert-warning">
+   {{message}}
+     <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+  </div>
+</div>
+<!--<div class="row">
 
 <div align="center" class="col-xs-12 col-md-12 col-lg-12" style="border:1px;">
   <img src="http://lorempixel.com/200/200/people/9/" class="avatar img-circle img-thumbnail" alt="avatar" style="margin-left:50px;">
@@ -19,48 +25,81 @@
     <input type="file" class="upload" />
 </div>
 </div>
-</div>
+</div>-->
+
 
 <div class="row">
 <div align="center" class="col-xs-12 col-md-4 col-lg-12">
 
  <h3>Personal info</h3>
-  <form  role="form">
-        <div class="form-group">
-          <label class="col-lg-3 control-label" style="margin-top:10px;">First name:</label>
-          <div class="col-lg-8">
-            <input class="form-control" value="Jane" type="text"  style="margin-top:10px;">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Last name:</label>
-          <div class="col-lg-8">
-            <input class="form-control" value="Bishop" type="text">
-          </div>
-        </div>
-       
-        <div class="form-group">
-          <label class="col-lg-3 control-label">Email:</label>
-          <div class="col-lg-8">
-            <input class="form-control" value="janesemail@gmail.com" type="text">
-          </div>
-        </div>
+
+
+<form  name="myForm"  ng-submit="myForm.$valid && update()" novalidate>
+
+ <p style="font-size:15px;font-weight:bold;margin-top:20px;" class="text-info"> {{mailid}} </p>
+
+<div class="form-group has-feedback" ng-class="{ 'has-error': myForm.$invalid}">
+
+     <input type="text" class="form-control" name="firstname" placeholder="First name" style="background-color:#e0e0eb;margin-top:20px;" ng-model="user.firstname" required  ng-maxlength="20" ng-pattern="/^[a-zA-z]+$/" class="text-info" />
+  
+<div ng-show="myForm.$submitted || myForm.firstname.$touched" style="margin-top:0px;padding-bottom:20px;padding-top:0px;">
+            <div ng-show="myForm.firstname.$error.required" class="help-block"><p class="text-danger" style="font-size:15px;font-weight:bold;">please enter first name</p></div>
+            <div ng-show="myForm.firstname.$error.pattern" class="help-block"><p class="text-danger" style="font-size:15px;font-weight:bold;">please enter valid first name</p></div>
+                <div ng-show="myForm.firstname.$error.maxlength"><p class="text-danger" style="font-size:15px;font-weight:bold;">first name must be less than 20.</p></div>
+                        
+                        
+    </div>
+
+
+
+    <input type="text" class="form-control" name="lname" placeholder="last name" style="background-color:#e0e0eb;" ng-model="user.lastname" required maxlength="15" ng-pattern="/^[a-zA-z]+$/"/>
+
+
+  
+<div ng-show="myForm.$submitted || myForm.lname.$touched" style="margin-top:0px;padding-bottom:20px;padding-top:0px;">
+
+<div ng-show="myForm.firstname.$valid">
+            <div ng-show="myForm.lname.$error.required" class="help-block"><p class="text-danger" style="font-size:15px;font-weight:bold;"><p> please enter last name</p></div>
+            <div ng-show="myForm.lname.$error.pattern" class="help-block"><p class="text-danger" style="font-size:15px;font-weight:bold;"><p> please enter valid last name</p></div>
+            <div ng-show="myForm.lname.$error.maxlength"><p class="text-danger" style="font-size:15px;font-weight:bold;"><p>first name must be less than 15.</p></div>
+
+                        
+    </div>
+</div>
+ 
+
+
+
+<input type="number" class="form-control" name="mobno" placeholder="mobileno" style="background-color:#e0e0eb;" ng-model="user.phonno" required minlength="10" maxlength="10">
+
+
+<div ng-show="myForm.$submitted || myForm.mobno.$touched" style="margin-top:0px;padding-bottom:20px;padding-top:0px;">
+
+
+<div ng-show="myForm.firstname.$valid && myForm.lname.$valid">
+            <div ng-show="myForm.username.$error.required" class="help-block"><p class="text-danger" style="font-size:15px;font-weight:bold;"> please enter mobile no</p></div>
+              <div ng-show="myForm.username.$error.minlength || myForm.Mobileno.$error.maxlength"><p class="text-danger" style="font-size:15px;font-weight:bold;"> enter valid mobile no</p></div>
+                        
+    </div>
+    </div>
+
+
+    <input type="text" class="form-control" name="gname" placeholder="Group name" style="background-color:#e0e0eb;" ng-model="user.groupname" required  ng-maxlength="25"  />
+  
+<div ng-show="myForm.$submitted || myForm.gname.$touched" style="margin-top:0px;padding-bottom:20px;padding-top:0px;">
+            <div ng-show="myForm.gname.$error.required" class="help-block"><p class="text-danger" style="font-size:15px;font-weight:bold;">please enter group name</p></div>
       
-        <div class="form-group">
-          <label class="col-md-3 control-label">Username:</label>
-          <div class="col-md-8">
-            <input class="form-control" value="janeuser" type="text">
-          </div>
-        </div>
-
+                <div ng-show="myForm.firstname.$error.maxlength"><p class="text-danger" style="font-size:15px;font-weight:bold;">group name must be less than 25.</p></div>
+                        
+                        
+    </div>
         <div class="form-group">
          
          
-            <input class="btn btn-primary" value="Save Changes" type="button" style="margin-left:1px;">
+          <input type="submit" class="btn-primary btn-lg" value="upadate"></input>
 
-            &nbsp;&nbsp;
-        
-            <input class="btn btn-default" value="Cancel" type="reset">
+
+         
 
            
       

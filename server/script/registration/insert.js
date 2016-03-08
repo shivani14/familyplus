@@ -60,7 +60,7 @@ myapp.post("/insert",function(req,res,next)
 	var first_name = data.firstname;
 	var last_name = data.lastname;
 	var emailid = data.emailid;
-	var mobno = data.mobileno;
+	var mobno = parseInt(data.mobileno);
 	var password = data.password;
 	var groupName = data.groupname;
 
@@ -180,7 +180,7 @@ myapp.post("/login",function(req,res)
 	var emailid = data.uname;
 	var password = data.password;
 	console.log(emailid +" "+password);
-	member_model.findOne({$and:[{'password':password},{'mail_id':emailid}]},'_id first_name role group_id',function(err,data)
+	member_model.findOne({$and:[{'password':password},{'mail_id':emailid}]},'_id first_name last_name role group_id mail_id phon_no',function(err,data)
 	{
 			if(err)
 			{
@@ -201,14 +201,20 @@ myapp.post("/login",function(req,res)
 					role = data.role;
 					firstname = data.first_name;
 					group_id = data.group_id;
+					mail_id = data.mail_id;
+					lastname = data.last_name;
+					phon_no = data.phon_no;
 
 					sess = req.session;
 					sess.firstname = firstname;
 					sess.role = role;
 					sess.group_id = group_id;
-					
+					sess.mail_id= mail_id;
+					sess.lastname = lastname;
+					sess.phon_no = phon_no;
+				
 
-				group_model.findOne({_id:group_id},'invite_id',function(err,data)
+				group_model.findOne({_id:group_id},'invite_id group_name',function(err,data)
 				{
 					if(err)
 					{
@@ -218,7 +224,10 @@ myapp.post("/login",function(req,res)
 					{
 						inviteid = data.invite_id;
 						sess.inviteid = inviteid;
-						var object = {'firstname':sess.firstname,'role':sess.role,'group_id':sess.group_id};
+						gname = data.group_name;
+						sess.gname = gname;
+
+						var object = {'firstname':sess.firstname,'lastname':sess.lastname,'phon_no':sess.phon_no,'role':sess.role,'group_id':sess.group_id,'mail_id':mail_id,'groupname':sess.gname};
 						console.log(sess.inviteid);
 						res.setHeader('Content-Type', 'application/json');
    					 res.send(object);
@@ -284,8 +293,10 @@ myapp.post("/info",function(req,res)
 	var data = req.body;
 	var group_id = data.group_id;
 	var name = data.name;
+	var mail_id = data.mail_id;
+	console.log(data);
 
-	member_model.find({'group_id':group_id},'first_name last_name mail_id phon_no',function(err,data)
+	member_model.find({$and:[{'group_id':group_id},{mail_id:{$ne:mail_id}}]},'first_name last_name mail_id phon_no',function(err,data)
 	{
 		if(err)
 		{
@@ -316,7 +327,70 @@ myapp.post("/info",function(req,res)
 			}
 		}
 	});
+
 });
+
+myapp.post("/changePassword",function(req,res)
+{
+	var data = req.body;
+	var password = data.password;
+	var newpassword = data.newpassword;
+	var mailid = data.mail_id;
+	console.log(data);
+
+	member_model.update({$and:[{mail_id:mailid},{password:password}]},{password:newpassword},{ multi: false},function(err,numAffected)
+	{
+		if(err)
+		{
+			throw err;
+		}
+		else
+		{
+			if(numAffected.nModified == 1)
+			{
+				res.send(true);
+			}
+			else
+			{
+					res.status(404).send("err");
+			}
+		}
+		
+		}
+			
+	);
+
+});
+
+myapp.post("/editMember",function(req,res)
+{
+	var data = req.body;
+	var email = data.mailid;
+	var firstname = data.firstname;
+	var lastname = data.lastname;
+	var phonno = parseInt(data.phonno);
+	var grupname = data.grupname;
+
+	member_model.update({mail_id:email},{$set:{first_name:firstname,last_name:lastname,phon_no:phonno}},{multi:true},function(err,numAffected)
+	{
+		if(err)
+		{
+			throw err;
+		}
+		else
+		{
+			
+			if(numAffected.nModified == 1)
+			{
+				res.send(true);
+			}
+			else
+			{
+				res.status(404).send("err");
+			}
+		}
+	})
+})
 
 
 myapp.listen(3001);

@@ -21,9 +21,13 @@ angular.module('FamilyPlusApp').controller('loginController',['$scope','$locatio
      		$scope.user ={};
      		$scope.response = angular.fromJson(data);
      		$rootScope.name = $scope.response.firstname;
+               $rootScope.lastname = $scope.response.lastname;
                          $rootScope.role = $scope.response.role;
                       	$rootScope.groupid = $scope.response.group_id;
-
+                         $rootScope.mailid = $scope.response.mail_id;
+                         $rootScope.gname = $scope.response.groupname;
+                         $rootScope.phonno = $scope.response.phon_no;
+                         console.log($scope.response);
 
      				$window.location.href="#/mainPage/home";
           }).error(function(data,status)
