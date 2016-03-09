@@ -134,3 +134,7 @@ a.item {
 {
 	background-color:red;
 }
+
+#map_canvas {position: relative;}
+
+#map_canvas {position: absolute; top: 0; right: 0; bottom: 0; left: 0;}

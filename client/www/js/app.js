@@ -55,6 +55,16 @@ angular.module('FamilyPlusApp', ['ionic'])
                     }
                
             }).
+            state('mainPage.getmap',{
+                    url:"/map",
+                    views:{
+                        'content':{
+                                templateUrl:'templates/map.template.html',
+                                controller:'mapController'
+                        }
+                    }
+               
+            }).
             state('mainPage.home',{
                 url:"/home",
                 views:{

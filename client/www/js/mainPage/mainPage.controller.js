@@ -1,4 +1,4 @@
-angular.module('FamilyPlusApp').controller('mainPageController',['$scope','$location','$ionicPopover',function($scope,$location,$ionicPopover)
+angular.module('FamilyPlusApp').controller('mainPageController',['$scope','$location','$ionicPopover','$rootScope',function($scope,$location,$ionicPopover,$rootScope)
 {
   $scope.role = $scope.role;
   console.log($scope.role);
@@ -32,6 +32,8 @@ angular.module('FamilyPlusApp').controller('mainPageController',['$scope','$loca
     $scope.$on('$destroy', function() {
     $scope.popover.remove();
   });
+
+
 
 	
 }]);

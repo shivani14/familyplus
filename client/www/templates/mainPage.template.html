@@ -1,7 +1,113 @@
 
 <ion-side-menus>
-<ion-side-menu-content>
 
+<ion-side-menu side="left">
+
+<h1 class="title" style="background-image:url('img/backimg7.jpg');height:100px;font-size:30px;">Welcome {{name}}</h1>
+
+
+<ion-content style="padding-top:100px;">
+<ion-list style="background-color:red;">
+
+
+
+<ion-item menu-close ui-sref=".home">
+<span class="icon ion-home" style="font-size:25px;"> </span> &nbsp;
+
+Home
+</ion-item>
+
+<ion-item ui-sref=".invite" menu-close ng-show="flag">
+<span class="icon ion-person-add" style="font-size:25px;"> </span> &nbsp;
+
+Invite
+</ion-item>
+
+<ion-item  href="#/Fencing" menu-close ng-show="flag">
+<span class="icon ion-android-locate" style="font-size:25px;"> </span> &nbsp;
+
+fenceing
+</ion-item>
+
+
+
+
+
+
+<ion-item menu-close ui-sref=".lastCheckin">
+<span class="icon ion-location" style="font-size:25px;"> </span> &nbsp;
+
+Checkin
+</ion-item>
+
+<ion-item menu-close ui-sref=".getmap">
+<span class="icon ion-location" style="font-size:25px;"> </span> &nbsp;
+
+MAP
+</ion-item>
+
+
+
+
+<ion-item menu-close ui-sref=".groupMember">
+<span class="icon ion-person-stalker" style="font-size:25px;"> </span> &nbsp;
+
+View Member
+</ion-item>
+
+<ion-item menu-close ui-sref=".editProfile">
+<span class="icon ion-person" style="font-size:25px;"> </span> &nbsp;
+
+Edit Profile
+</ion-item>
+
+<ion-item menu-close ui-sref=".changePass">
+<span class="icon ion-locked" style="font-size:25px;"> </span> &nbsp;
+
+Change Password
+</ion-item>
+
+<ion-item menu-close ui-sref=".search">
+<span class="icon ion-search" style="font-size:25px;"> </span> &nbsp;
+
+Search Location
+</ion-item>
+<ion-item menu-close ui-sref="login">
+<span class="icon ion-log-out" style="font-size:25px;"> </span> &nbsp;
+
+Sign Out
+</ion-item>
+
+
+</ion-list>
+</ion-content>
+
+</ion-side-menu>
+
+<ion-side-menu-content>
+<ion-nav-view name="content"  animation="slide-left-right" style="margin-top:0px;">
+
+
+<!--
+<div class="list"> 
+<a class="item item-avatar" href="#">
+      <img src="img/person1.jpg">
+      <h2>Venkman</h2>
+      <p>Back off, man. I'm a scientist.</p>
+    </a>
+<a class="item item-avatar" href="#">
+      <img src="img/person2.jpg">
+      <h2>Venkman</h2>
+      <p>Back off, man. I'm a scientist.</p>
+    </a>
+
+      <a class="item item-avatar" href="#">
+      <img src="img/person2.jpg">
+      <h2>Venkman</h2>
+      <p>Back off, man. I'm a scientist.</p>
+    </a>
+    </div> -->
+ </ion-nav-view>
 
 
 <ion-nav-bar class="bar bar-header bar-calm">
@@ -41,29 +147,7 @@
 </ion-nav-bar>
 
 
-<ion-nav-view name="content"  animation="slide-left-right" style="margin-top:35px;">
 
-
-<!--
-<div class="list"> 
-<a class="item item-avatar" href="#">
-      <img src="img/person1.jpg">
-      <h2>Venkman</h2>
-      <p>Back off, man. I'm a scientist.</p>
-    </a>
-<a class="item item-avatar" href="#">
-      <img src="img/person2.jpg">
-      <h2>Venkman</h2>
-      <p>Back off, man. I'm a scientist.</p>
-    </a>
-
-      <a class="item item-avatar" href="#">
-      <img src="img/person2.jpg">
-      <h2>Venkman</h2>
-      <p>Back off, man. I'm a scientist.</p>
-    </a>
-    </div> -->
- </ion-nav-view>
 
 
 
@@ -98,89 +182,7 @@
 
 </ion-side-menu-content> 
  
-<ion-side-menu side="left">
 
-<h1 class="title" style="background-image:url('img/backimg7.jpg');height:100px;font-size:30px;">Welcome {{name}}</h1>
-
-
-<ion-content style="padding-top:100px;">
-<ion-list style="background-color:red;">
-
-
-
-<ion-item menu-close ui-sref=".home">
-<span class="icon ion-home" style="font-size:25px;"> </span> &nbsp;
-
-Home
-</ion-item>
-
-<ion-item ui-sref=".invite" menu-close ng-show="flag">
-<span class="icon ion-person-add" style="font-size:25px;"> </span> &nbsp;
-
-Invite
-</ion-item>
-
-<ion-item  href="#/Fencing" menu-close ng-show="flag">
-<span class="icon ion-android-locate" style="font-size:25px;"> </span> &nbsp;
-
-fenceing
-</ion-item>
-
-
-</div>
-
-
-
-<ion-item menu-close ui-sref=".lastCheckin">
-<span class="icon ion-location" style="font-size:25px;"> </span> &nbsp;
-
-Checkin
-</ion-item>
-
-
-
-<ion-item menu-close href="#/MAP">
-<span class="icon ion-map" style="font-size:25px;"> </span> &nbsp;
-
-Map
-</ion-item>
-
-
-
-<ion-item menu-close ui-sref=".groupMember">
-<span class="icon ion-person-stalker" style="font-size:25px;"> </span> &nbsp;
-
-View Member
-</ion-item>
-
-<ion-item menu-close ui-sref=".editProfile">
-<span class="icon ion-person" style="font-size:25px;"> </span> &nbsp;
-
-Edit Profile
-</ion-item>
-
-<ion-item menu-close ui-sref=".changePass">
-<span class="icon ion-locked" style="font-size:25px;"> </span> &nbsp;
-
-Change Password
-</ion-item>
-
-<ion-item menu-close ui-sref=".search">
-<span class="icon ion-search" style="font-size:25px;"> </span> &nbsp;
-
-Search Location
-</ion-item>
-<ion-item menu-close ui-sref="login">
-<span class="icon ion-log-out" style="font-size:25px;"> </span> &nbsp;
-
-Sign Out
-</ion-item>
-
-
-</ion-list>
-</ion-content>
-
-</ion-side-menu>
 
 </ion-side-menus>
 
