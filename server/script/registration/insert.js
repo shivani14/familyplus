@@ -48,8 +48,17 @@ var member_schema = new schema(	{
 
 });
 
- var member_model = mongoose.model('tbl_memberinfos',member_schema);
+var checkin_schema = new schema({
+	group_id:{type:schema.ObjectId,ref:'member_model',required:true},
+	member_id:{type:schema.ObjectId,ref:'member_model',required:true},
+	latitude:{type:Number,required:true},
+	longitude:{type:Number,required:true},
+	activity:{type:String,required:true},
+	time:{type:Date,required:true}
+})
 
+ var member_model = mongoose.model('tbl_memberinfos',member_schema);
+ var checkin_model = mongoose.model('tbl_checkins',checkin_schema);
 
 // inserting data into mongodb
 
@@ -198,6 +207,7 @@ myapp.post("/login",function(req,res)
 				else
 				{
 					member = data._id;
+					
 					role = data.role;
 					firstname = data.first_name;
 					group_id = data.group_id;
@@ -205,14 +215,17 @@ myapp.post("/login",function(req,res)
 					lastname = data.last_name;
 					phon_no = data.phon_no;
 
+				
+
 					sess = req.session;
+						sess.member = member;
 					sess.firstname = firstname;
 					sess.role = role;
 					sess.group_id = group_id;
 					sess.mail_id= mail_id;
 					sess.lastname = lastname;
 					sess.phon_no = phon_no;
-				
+				console.log(sess.member);
 
 				group_model.findOne({_id:group_id},'invite_id group_name',function(err,data)
 				{
@@ -227,7 +240,7 @@ myapp.post("/login",function(req,res)
 						gname = data.group_name;
 						sess.gname = gname;
 
-						var object = {'firstname':sess.firstname,'lastname':sess.lastname,'phon_no':sess.phon_no,'role':sess.role,'group_id':sess.group_id,'mail_id':mail_id,'groupname':sess.gname};
+						var object = {'firstname':sess.firstname,'lastname':sess.lastname,'phon_no':sess.phon_no,'role':sess.role,'group_id':sess.group_id,'mail_id':mail_id,'groupname':sess.gname,'member_id':sess.member};
 						console.log(sess.inviteid);
 						res.setHeader('Content-Type', 'application/json');
    					 res.send(object);
@@ -391,7 +404,72 @@ myapp.post("/editMember",function(req,res)
 		}
 	})
 })
+myapp.post("/checkin",function(req,res)
+{
+	var data = req.body;
+	var groupid = data.group_id;
+	 var lat = parseFloat(data.lat);
+	 var lng = parseFloat(data.lng);
+	 var activity = data.activity;
+	 var member_id = data.member;
+	 var time = data.time;
 
+	 
+	
+	checkin_model1 = new checkin_model({
+	group_id:groupid,
+	member_id:member_id,
+	latitude:lat,
+	longitude:lng,
+	activity:activity,
+	time:time
+	});
+
+	checkin_model1.save(function(err,model)
+	{
+		if(err)
+		{
+			throw err;
+		}
+		else
+		{
+			
+			res.send(data);
+		}
+
+	});
+
+	
+});
+myapp.post("/getCheckinData",function(req,res)
+{
+	var data = req.body;
+	var memberid = data.member_id;
+	var groupid = data.group_id;
+	checkin_model.find({group_id:groupid},function(err,data)
+	{
+		if(err)
+		{
+			throw err;
+
+		}
+		else
+		{
+			if(data == null)
+			{
+				console.log("no checkins yet");
+				res.send(false);
+			}
+			else{
+			
+			console.log(data);
+				res.send(data);
+			}
+		}
+
+	});
+
+});
 
 myapp.listen(3001);
 	

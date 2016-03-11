@@ -1,4 +1,4 @@
-angular.module('FamilyPlusApp').controller('mapController',['$scope','mapFactory',function($scope,mapFactory)
+angular.module('FamilyPlusApp').controller('mapController',['$scope','mapFactory','$rootScope',function($scope,mapFactory,$rootScope)
 {
 	/*$window.addEventListener('load', $scope.load, true);*/
 	
@@ -17,7 +17,9 @@ angular.module('FamilyPlusApp').controller('mapController',['$scope','mapFactory
  $scope.map = window.plugin.google.maps.Map.getMap($scope.div);
       	
  
-$scope.map.setClickable(true);
+
+
+/*$scope.div = mapFactory.getmap();*/
 
 	 	
 

@@ -27,6 +27,8 @@ angular.module('FamilyPlusApp').controller('loginController',['$scope','$locatio
                          $rootScope.mailid = $scope.response.mail_id;
                          $rootScope.gname = $scope.response.groupname;
                          $rootScope.phonno = $scope.response.phon_no;
+                         $rootScope.member = $scope.response.member_id;
+                         alert($rootScope.member);
                          console.log($scope.response);
 
      				$window.location.href="#/mainPage/home";
