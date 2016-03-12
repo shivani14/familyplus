@@ -1,9 +1,26 @@
 
- <div class="list" id="bckimg" style="margin-top:50px;"> 
-{{info.activity}}
+ <div class="list" id="bckimg" style="margin-top:35px;overflow:scroll;" ng-init="getData()"> 
+ 
+ <!--<div ng-show="flag">
+<div class="alert alert-info">
+	No checkins yet.
+ </div>
+ <div>-->
+
+
+ <div class="item item-avatar" ng-model = "finaldata" ng-repeat = "member in finaldata">
+      <img src="img/person1.jpg">
+   <h2>{{member.activity}}</h2> 
+   
+  @ {{member.latitude}} {{member.longitude}} &nbsp;&nbsp;  <span class="ion-location"> </span>
+
+ <p>Time:- {{member.time | date:'medium'}} 
+   &nbsp;&nbsp;&nbsp;<span class="ion-clock"></span> </p>
+   </div>
 
 
 
+<br>
   
       <div class="row">
       <div style="width:200px;height:200px;margin:auto;">

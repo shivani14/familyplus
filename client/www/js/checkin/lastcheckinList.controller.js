@@ -1,19 +1,38 @@
-angular.module('FamilyPlusApp').controller('lastcheckinListController',['$scope','$ionicPopup','checkinFactory','getCheckinDataFactory',function($scope,$ionicPopup,checkinFactory,getCheckinDataFactory)
+angular.module('FamilyPlusApp').controller('lastcheckinListController',['$scope','$ionicPopup','$http','memberFactory',function($scope,$ionicPopup,$http,memberFactory)
 {
-	
+			$scope.flag = false;
+			$scope.finaldata = [];
 			$scope.data ={};
-			$scope.ids = {};
-			$scope.ids.member = $scope.member;
-			$scope.ids.group_id = $scope.groupid;
-			$scope.getData = {};
-		$scope.getData = checkinFactory.getData($scope.ids);
+		$scope.data.id=$scope.member;
+		alert($scope.data.id);
+		$scope.getData = function()
+		{
+			$http({
+				method:'post',
+				url:'http://10.12.42.58:3001/getCheckinData',
+				data:$scope.data,
+				headers:{'Content-Type': 'application/json','Access-Control-Allow-Origin':'*'}
+			}).success(function(data)
+			{
+				$scope.memberData = {};
+				$scope.memberData = data;
+				$scope.finaldata = memberFactory.getdata($scope.memberData);
+		
+			}).error(function(status,data)
+			{
+				if(status == 403)
+				{
+					$scope.flag = true;
+				}
+			});
+		}
 
-		alert($scope.getData);
+		
 
 			$scope.msg = [];
 		$scope.show = function()
 		{
-
+			$scope.data.txt = "";
 			var popup = $ionicPopup.show({
 				template:'<input type="text" placeholder="share your feeeling" ng-model="data.txt">',
 				title:"Check in",
@@ -47,8 +66,8 @@ angular.module('FamilyPlusApp').controller('lastcheckinListController',['$scope'
 
 		$scope.getlocation = function()
 		{
-			$scope.getCheckinData ={};
-			$scope.info = {};
+		
+			
 			$scope.mapdata = {};
 					$scope.mapdata.group_id = $scope.groupid;
 			$scope.mapdata.activity = $scope.data.txt;
@@ -61,18 +80,46 @@ angular.module('FamilyPlusApp').controller('lastcheckinListController',['$scope'
 				$scope.mapdata.lat = location.latLng.lat;
 				$scope.mapdata.time = new Date(location.time);
 				$scope.mapdata.lng = location.latLng.lng;
+				alert($scope.mapdata.lat+" "+$scope.mapdata.lng);
+				$scope.insert($scope.mapdata);
 
-				/*$scope.address = checkinFactory.getAddress($scope.mapdata.lat,$scope.mapdata.lng);*/
-					$scope.getCheckinData = checkinFactory.add($scope.mapdata);
-					alert($scope.getCheckinData.group_id+ " "+$scope.getCheckinData.activity);
+			});
+			
+		};
 
-					$scope.info = $scope.getCheckinData;
-					
-				});
-			/*$scope.map =  checkinFactory.getmap();
-			alert($scope.map);*/
-		/*alert($scope.data.lat);*/
+		$scope.insert = function(insertdata)
+		{
+			alert("insertdata:"+insertdata.activity+" "+insertdata.member+" "+insertdata.lat);
+			$http({
+				method:'post',
+				url:'http://10.12.42.58:3001/checkin',
+				data:insertdata,
+				headers:{'Content-Type': 'application/json','Access-Control-Allow-Origin':'*'}
 
-		/*	$scope.get = checkinFactory.getlocation();*/
+			}).success(function(data)
+			{
+				if(data)
+				{
+					$scope.modeldata = insertdata;
+					/*$scope.request = {
+  					'position': "GOOGLE"
+					};
+					window.plugin.google.maps.Geocoder.geocode($scope.request, function(results) 
+					{	
+						if(results.length)
+  							{
+  								alert("location found");
+
+  							}else
+  							{
+  							     alert("not found");
+  							}
+					});*/
+				}
+
+			}).error(function(status,data)
+			{
+					alert("cant save data");
+			});
 		}
 }]);

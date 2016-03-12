@@ -1,5 +1,21 @@
 
-  <div class="list" id="bckimg" style="margin-top:50px;"> 
-{{mycheckin}}
+  <div class="list" id="bckimg" style="margin-top:35px;"> 
+ <div ng-show="flag">
+<div class="alert alert-warning" style="margin-top:20px;">
+None of your group members have checked in.<span class="ion-sad-outline"></span>
+ </div>
+</div>
+
+ <div class="item item-avatar" ng-model = "finaldata" ng-repeat = "member in finaldata"
+ ng-hide="flag">
+      <img src="img/person1.jpg">
+   <h2>{{member.activity}}</h2> 
+   
+  @ {{member.latitude}} {{member.longitude}} &nbsp;&nbsp;  <span class="ion-location"> </span>
+
+ <p>Time:- {{member.time | date:'medium'}} 
+   &nbsp;&nbsp;&nbsp;<span class="ion-clock"></span> </p>
+   </div>
+
     </div>
  

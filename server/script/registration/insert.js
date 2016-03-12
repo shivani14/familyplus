@@ -444,9 +444,9 @@ myapp.post("/checkin",function(req,res)
 myapp.post("/getCheckinData",function(req,res)
 {
 	var data = req.body;
-	var memberid = data.member_id;
-	var groupid = data.group_id;
-	checkin_model.find({group_id:groupid},function(err,data)
+	var memberid = data.id;
+	console.log(memberid);
+	checkin_model.find({member_id:memberid},function(err,data)
 	{
 		if(err)
 		{
@@ -458,11 +458,40 @@ myapp.post("/getCheckinData",function(req,res)
 			if(data == null)
 			{
 				console.log("no checkins yet");
-				res.send(false);
+				res.status(403).send("error");
 			}
 			else{
 			
 			console.log(data);
+				res.send(data);
+			}
+		}
+
+	});
+
+});
+
+myapp.post("/getlist",function(req,res)
+{
+	var data = req.body;
+	var group_id = data.id;
+	var memberid = data.memberid;
+	console.log(data);
+	checkin_model.find({$and:[{group_id:group_id},{member_id:{$ne:memberid}}]},function(err,data)
+	{
+		if(err)
+		{
+			throw err;
+
+		}
+		else
+		{
+			if(data == "")
+			{
+				res.status(403).send("error");
+			}
+			else
+			{
 				res.send(data);
 			}
 		}
