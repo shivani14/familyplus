@@ -9,7 +9,7 @@ angular.module('FamilyPlusApp').controller('loginController',['$scope','$locatio
      $rootScope.mailid = $scope.memberinfo.emailid;
      $scope.send = function()
      {
-     	
+     	alert("called");
      	$http({
      		method:'post',
      		url:'http://10.12.42.58:3001/login',
