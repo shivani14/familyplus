@@ -16,7 +16,7 @@ myapp.use(session({secret: 'ssshhhhh'}));
 
 var flag = true;
 var sess;
-var connect = mongoose.connect('mongodb://localhost/test');
+var connect = mongoose.connect('mongodb://10.12.42.58/test');
 var schema = mongoose.Schema;
 var Objid = schema.ObjectId;
 var group_id;
@@ -50,7 +50,7 @@ var member_schema = new schema(	{
 
 var checkin_schema = new schema({
 	group_id:{type:schema.ObjectId,ref:'member_model',required:true},
-	member_id:{type:schema.ObjectId,ref:'member_model',required:true},
+	member_id:{type:schema.ObjectId,ref:'tbl_memberinfos',required:true},
 	latitude:{type:Number,required:true},
 	longitude:{type:Number,required:true},
 	activity:{type:String,required:true},
@@ -61,6 +61,13 @@ var checkin_schema = new schema({
  var checkin_model = mongoose.model('tbl_checkins',checkin_schema);
 
 // inserting data into mongodb
+
+
+myapp.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 myapp.post("/insert",function(req,res,next)
 {
@@ -323,20 +330,9 @@ myapp.post("/info",function(req,res)
 			}
 			else
 			{
-			
-				/*info = {};
-				info.firstname = data.first_name;
-				info.lastname = data.last_name;
-				info.phon_no = data.phon_no;
-				info.mail_id = data.mail_id;
-				console.log(info);
-				res.setHeader('Content-Type', 'application/json');
-				res.send(info);*/
 				console.log(data);
 				res.send(data);
 				console.log("data is sended");
-
-
 			}
 		}
 	});
@@ -403,7 +399,8 @@ myapp.post("/editMember",function(req,res)
 			}
 		}
 	})
-})
+});
+
 myapp.post("/checkin",function(req,res)
 {
 	var data = req.body;
@@ -433,8 +430,8 @@ myapp.post("/checkin",function(req,res)
 		}
 		else
 		{
-			
-			res.send(data);
+			console.log(model);
+			res.send(model);
 		}
 
 	});
@@ -477,27 +474,17 @@ myapp.post("/getlist",function(req,res)
 	var group_id = data.id;
 	var memberid = data.memberid;
 	console.log(data);
-	checkin_model.find({$and:[{group_id:group_id},{member_id:{$ne:memberid}}]},function(err,data)
+	checkin_model.find({$and:[{group_id:group_id},{member_id:{$ne:memberid}}]}).populate('member_id').exec(function(err,data)
 	{
 		if(err)
 		{
-			throw err;
-
+			return handleError(err);
 		}
 		else
 		{
-			if(data == "")
-			{
-				res.status(403).send("error");
-			}
-			else
-			{
-				res.send(data);
-			}
+			res.send(data);
 		}
-
 	});
-
 });
 
 myapp.listen(3001);
