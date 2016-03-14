@@ -5,7 +5,7 @@
 
 <ion-nav-buttons side="left">
 <button class="button ion-ios-arrow-back" style="font-size:25px;" ng-click="backpage()"> </button>
- <h1 class="title" style="margin-left:160px;">register here</h1>
+ <h1 class="title" style="text-align:center;margin:all;">register here</h1>
 
 </ion-nav-bar>
 
@@ -162,7 +162,7 @@
 
 <p class="text-danger" style="font-size:15px;font-weight:bold;"> {{err}}</p>
 
-<input type="submit" class="btn-primary btn-lg" value="Sign up" style="margin-left:70px;margin-top:20px;"  ng-click="myForm.$valid &&check() && send()"></input>
+<button type="submit" class="button button-positive" value="Sign up" ng-click="myForm.$valid &&check() && send()">Register</button>
 </div>
 </form>
 </div>

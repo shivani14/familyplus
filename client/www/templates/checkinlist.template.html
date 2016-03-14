@@ -6,10 +6,11 @@ None of your group members have checked in.<span class="ion-sad-outline"></span>
  </div>
 </div>
 
- <div class="item item-avatar" ng-model = "finaldata" ng-repeat = "member in finaldata"
+ <div class="item item-avatar" ng-model = "finalData" ng-repeat = "member in finalData"
  ng-hide="flag">
       <img src="img/person1.jpg">
-   <h2>{{member.activity}}</h2> 
+        <h2>{{member.member_id.first_name}} {{member.member_id.last_name}} </h2>  was
+ {{member.activity}}</h2> 
    
   @ {{member.latitude}} {{member.longitude}} &nbsp;&nbsp;  <span class="ion-location"> </span>
 

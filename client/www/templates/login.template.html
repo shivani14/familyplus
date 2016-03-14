@@ -33,7 +33,7 @@
 
 <div class="row">
 
-<div class="col-xs-12 col-md-8 col-lg-12 col-sm-12"style="margin-left:25px;height:25px;">
+<div class="col col-75"style="margin:auto;height:25px;">
 
 <form  name="myForm"  ng-submit="myForm.$valid && send()" novalidate>
 <div class="form-group has-feedback" ng-class="{ 'has-error': myForm.$invalid}">
@@ -46,11 +46,11 @@
 	
 <div ng-show="myForm.$submitted || myForm.emailid.$touched" style="margin-top:0px;padding-bottom:20px;padding-top:0px;">
 
-						<div ng-show="myForm.emailid.$error.required" class="help-block"><p class="text-danger" style="font-size:15px;font-weight:bold;"> please enter emailid</p></div>
+<div ng-show="myForm.emailid.$error.required" class="help-block"><p style="font-size:15px;font-weight:bold;color:red;"> please enter emailid</p></div>
 						
-						<div ng-show="myForm.emailid.$error.maxlength"><p class="text-danger" style="font-size:15px;font-weight:bold;">email id must be less than 50.</p></div>
+<div ng-show="myForm.emailid.$error.maxlength"><p style="font-size:15px;font-weight:bold;color:red;">email id must be less than 50.</p></div>
 
-							<div ng-show="myForm.emailid.$error.email"><p class="text-danger" style="font-size:15px;font-weight:bold;">enter valid email id</p></div>
+<div ng-show="myForm.emailid.$error.email"><p style="font-size:15px;font-weight:bold;color:red;">enter valid email id</p></div>
 
 												
 		</div>
@@ -61,9 +61,9 @@
 <div ng-show="myForm.$submitted || myForm.password.$touched" style="margin-top:0px;">
 
 <div ng-show="myForm.emailid.$valid">
-						<div ng-show="myForm.password.$error.required"><p class="text-danger" style="font-size:15px;font-weight:bold;"> please enter password</div>
+						<div ng-show="myForm.password.$error.required"><p style="font-size:15px;font-weight:bold;color:red;"> please enter password</div>
 
-						<div ng-show="myForm.password.$error.minlength"><p class="text-danger" style="font-size:15px;font-weight:bold;"> password length is short.(minlenght=6)
+<div ng-show="myForm.password.$error.minlength"><p  style="font-size:15px;font-weight:bold;color:red;"> password length is short.(minlenght=6)
 						</div>
 						</div>
 						
@@ -75,8 +75,9 @@
 
 	
 
-<input type="submit" class="btn-primary btn-lg" value="login"></input>
-<input type="button" class="btn-default btn-lg" value="Register" ng-click="registrationpage()"></input></a> 
+<button type="submit" class="button button-positive" value="login">login</button>
+<br>
+ <button type="submit" class="button button-positive" value="register" ng-click="registrationpage()" style="margin-top:20px;">register</button>
 <br>
 
 

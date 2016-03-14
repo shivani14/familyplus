@@ -15,7 +15,7 @@
 
 
 <form name="myForm" ng-submit="myForm.$valid && sendEmail()">
-<div class="form-group has-feedback"  ng-class="{ 'has-error': myForm.$invalid}" style="margin-top:20px;">
+<div class="form-group has-feedback"  ng-class="{ 'has-error': myForm.$invalid}" style="margin:auto;">
 <br>
 
 <input type="email" class="form-control" name="emailid" placeholder="Email id" style="background-color:#e0e0eb;" ng-model="user.emailid" required maxlength="50" />
@@ -35,7 +35,7 @@
   <div class="row">
       <div style="margin:auto;">
      
-    <button type="submit" class="btn-primary btn-lg" value="invite people" style="width:150px;"> Invite </button>
+    <button type="submit" class="button button-positive" value="invite people"> Invite </button>
 
       </div>
       </div>
