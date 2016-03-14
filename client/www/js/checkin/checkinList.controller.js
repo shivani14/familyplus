@@ -4,6 +4,7 @@ angular.module('FamilyPlusApp').controller('checkinlistController',['$scope','$h
 	$scope.sendData={};
 	$scope.sendData.id = $scope.groupid;
 	$scope.sendData.memberid = $scope.member;
+	alert($scope.sendData.id+" "+$scope.sendData.memberid);
 	$http({
 		method:'post',
 		url:'http://10.12.42.58:3001/getlist',
@@ -13,7 +14,7 @@ angular.module('FamilyPlusApp').controller('checkinlistController',['$scope','$h
 	{
 		$scope.finalData = {};
 		$scope.finalData = data;
-
+		
 		
 	}).error(function(status,data)
 	{

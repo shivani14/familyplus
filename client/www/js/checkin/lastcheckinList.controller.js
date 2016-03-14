@@ -1,5 +1,6 @@
 angular.module('FamilyPlusApp').controller('lastcheckinListController',['$scope','$ionicPopup','$http','memberFactory',function($scope,$ionicPopup,$http,memberFactory)
 {
+			
 			$scope.flag = false;
 			$scope.finaldata = [];
 			$scope.data ={};
@@ -16,6 +17,7 @@ angular.module('FamilyPlusApp').controller('lastcheckinListController',['$scope'
 			{
 				$scope.memberData = {};
 				$scope.memberData = data;
+				alert("getdatacalled");
 				$scope.finaldata = memberFactory.getdata($scope.memberData);
 		
 			}).error(function(status,data)
@@ -60,7 +62,7 @@ angular.module('FamilyPlusApp').controller('lastcheckinListController',['$scope'
 			popup.then(function(res)
 			{
 				$scope.getlocation();
-				
+				console.log("popup called");
 			});
 		}
 
@@ -80,7 +82,7 @@ angular.module('FamilyPlusApp').controller('lastcheckinListController',['$scope'
 				$scope.mapdata.lat = location.latLng.lat;
 				$scope.mapdata.time = new Date(location.time);
 				$scope.mapdata.lng = location.latLng.lng;
-				alert($scope.mapdata.lat+" "+$scope.mapdata.lng);
+				alert("getmylocation"+$scope.mapdata.lat+" "+$scope.mapdata.lng);
 				$scope.insert($scope.mapdata);
 
 			});
@@ -100,7 +102,12 @@ angular.module('FamilyPlusApp').controller('lastcheckinListController',['$scope'
 			{
 				if(data)
 				{
-					$scope.modeldata = insertdata;
+				
+					$scope.modeldata = data;
+					
+					/*alert($scope.modeldata.lat+" "+$scope.modeldata.lng);
+					alert("checked in successfully");
+					
 					/*$scope.request = {
   					'position': "GOOGLE"
 					};
